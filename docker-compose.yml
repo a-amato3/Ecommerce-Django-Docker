@@ -2,7 +2,8 @@ version: '3'
     
 services:
   db:
-    build: .
+    # restart: always
+    # build: .
     image: postgres
     environment:
       - POSTGRES_DB=postgres
@@ -10,19 +11,17 @@ services:
       - POSTGRES_PASSWORD=postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
-    expose:
+    ports:
       - "5432"
   web:
+    restart: always
     build: .
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
       - "8000:8000"
-    links:
-      - db
     depends_on:
       - db
-
 volumes:
   pgdata:
