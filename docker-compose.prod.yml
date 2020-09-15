@@ -1,0 +1,9 @@
+version: '3'
+    
+services:
+  backend:
+    build: ./backend
+    command: docker-compose up
+#   frontend:
+#     build: ./frontend
+#     command: docker-compose up
